@@ -1,0 +1,24 @@
+Adult Enteral Formula Guide (ONS Guide)
+Copyright (c) 2026 Warodom Phaenthong, M.D.
+
+The app's source code, text and calculators are licensed under the Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+The full licence text is in the LICENSE file and at
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+In short: you may share and adapt this work for non-commercial purposes, provided you credit the
+author, link to the licence, say what you changed, and release your version under the same licence.
+
+No warranty. The guide is decision support for healthcare professionals. It does not replace the
+product label, local guidelines or clinical judgement; see the disclaimer inside the app.
+
+Not covered by this licence:
+- Composition values and product photos are reproduced from the Phramongkutklao Hospital table
+  "Enteral Nutrition Formulas for Adults: Composition of Commercial Enteral Formula (update 3/2024)".
+- Product names, trademarks and packaging shown in the photos belong to their manufacturers and licence holders.
+- Registration data come from the Thai FDA product search and the NHS dm+d browser; each product links to its record.
+
+Third-party software included in the built file (enteral-formula-guide.html), each under the MIT License
+and copyright of its authors:
+- React and React DOM 18.3.1, Copyright (c) Meta Platforms, Inc. and affiliates
+- Styles generated with Tailwind CSS 3.4.17, Copyright (c) Tailwind Labs, Inc.
