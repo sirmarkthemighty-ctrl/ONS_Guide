@@ -302,6 +302,16 @@ async function main() {
     if (reCollapsed) throw new Error('References section failed to collapse on second click!');
     console.log('✓ References section re-collapsed cleanly');
 
+    // Verification: donate button opens the PromptPay QR pop-up; Escape closes only the pop-up
+    await evalJs('document.querySelector("[data-donate-btn]").click()');
+    await sleep(500);
+    const donate = await evalJs(`(() => { const img = document.querySelector('[data-donate-modal] [data-donate-qr]'); return { img: !!img, w: img ? img.naturalWidth : 0 }; })()`);
+    if (!donate.img || donate.w < 100) throw new Error('Donate pop-up or QR image missing: ' + JSON.stringify(donate));
+    await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
+    await sleep(300);
+    if (await evalJs('Boolean(document.querySelector("[data-donate-modal]"))')) throw new Error('Donate pop-up did not close on Escape');
+    console.log(`✓ Donate button opens the PromptPay QR (${donate.w} px) and Escape closes it`);
+
     // Verification: guide content tied to sources (20 Oct 2026 audit)
     const escape = async () => { await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 }); await sleep(300); };
     const guideBtn = (i) => evalJs(`(() => { const row = document.querySelector('.sticky .grid.grid-cols-4'); row.children[${i}].click(); return true; })()`);
