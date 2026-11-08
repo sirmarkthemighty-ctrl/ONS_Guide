@@ -3,6 +3,7 @@ const { useState, useEffect, useMemo, useRef } = React;
 // --- Native SVG Icons ---
 const Search = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>);
 const LayoutGrid = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>);
+const TableIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="4" width="18" height="16" rx="1.5"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="14.5" x2="21" y2="14.5"></line><line x1="9.5" y1="9" x2="9.5" y2="20"></line></svg>);
 const ListIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>);
 const SortIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="15" y1="18" x2="15" y2="6"></line><polyline points="11 10 15 6 19 10"></polyline><line x1="9" y1="6" x2="9" y2="18"></line><polyline points="5 14 9 18 13 14"></polyline></svg>);
 const ActivityIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>);
@@ -1596,10 +1597,19 @@ const ENTERAL_FORMULAS = [
 // --- Update Changelog Data ---
 const changelogData = [
   {
-    version: "v1.6.0",
+    version: "v1.7.1",
+    date: "November 9, 2026",
+    features: [],
+    improvements: [
+      "Softer colours like the Bronchodilator Guide: the four guide buttons and the Filters button are pale tinted; category and filter chips show coloured text with a light tint, and only the selected chip is solid. Each category keeps the colour it has in the Key."
+    ]
+  },
+  {
+    version: "v1.7.0",
     date: "November 5, 2026",
     features: [
-      "Donate button (heart) next to the language switch: opens the PromptPay QR code for voluntary support. It does not change any content."
+      "Donate button (heart) next to the language switch: opens the PromptPay QR code for voluntary support. It does not change any content.",
+      "New list view: one compact row per product with its photo, serving, protein per 1,000 kcal, P:C:F, GI and osmolality. The former list view, a table, is now called Table view and has a table icon."
     ],
     improvements: []
   },
@@ -1678,9 +1688,16 @@ const changelogData = [
 ];
 
 const CHANGELOG_TH = {
-  "v1.6.0": {
+  "v1.7.1": {
+    features: [],
+    improvements: [
+      "ปรับสีให้นุ่มนวลแบบคู่มือยาสูด: ปุ่มคู่มือทั้งสี่และปุ่มตัวกรองเป็นสีอ่อน ชิปหมวดหมู่และตัวกรองแสดงตัวอักษรสีพร้อมพื้นอ่อนเมื่อชี้ และเป็นสีเข้มเฉพาะเมื่อเลือก แต่ละหมวดใช้สีเดียวกับในหน้าคำอธิบายสัญลักษณ์"
+    ]
+  },
+  "v1.7.0": {
     features: [
-      "ปุ่มสนับสนุน (รูปหัวใจ) ข้างปุ่มเปลี่ยนภาษา เปิด QR พร้อมเพย์สำหรับการสนับสนุนโดยสมัครใจ ไม่มีผลต่อเนื้อหา"
+      "ปุ่มสนับสนุน (รูปหัวใจ) ข้างปุ่มเปลี่ยนภาษา เปิด QR พร้อมเพย์สำหรับการสนับสนุนโดยสมัครใจ ไม่มีผลต่อเนื้อหา",
+      "เพิ่มมุมมองรายการ: แถวกระชับหนึ่งแถวต่อผลิตภัณฑ์ พร้อมภาพ ปริมาณต่อมื้อ โปรตีนต่อ 1,000 kcal, P:C:F, GI และออสโมลาลิตี มุมมองรายการเดิมซึ่งเป็นตาราง เปลี่ยนชื่อเป็นมุมมองตารางและใช้ไอคอนตาราง"
     ],
     improvements: []
   },
@@ -1800,6 +1817,8 @@ const translations = {
     totalFound: 'formulas found',
     gridView: 'Grid view',
     listView: 'List view',
+    tableView: 'Table view',
+    perKcal: 'per 1,000 kcal',
     sortLabel: 'Sort By',
     
     // Sort options
@@ -2078,7 +2097,9 @@ const translations = {
     clearAll: 'ล้างตัวกรอง',
     totalFound: 'สูตรที่พบ',
     gridView: 'มุมมองการ์ด',
-    listView: 'มุมมองตาราง',
+    listView: 'มุมมองรายการ',
+    tableView: 'มุมมองตาราง',
+    perKcal: 'ต่อ 1,000 kcal',
     sortLabel: 'เรียงตาม',
 
     // Sort options
@@ -2362,6 +2383,26 @@ const calculateNitrogenBalance = (proteinGrams, uunGrams, extraLossGrams = 0) =>
 };
 
 // Format color helper
+// Chip tones (bronchodilator-guide pattern): coloured text + light hover tint when off, solid when on.
+// Category colours match the chips in the Key window.
+const CHIP_TONE = {
+  slate: ['text-slate-600 hover:bg-slate-50', 'bg-slate-600 text-white shadow-sm'],
+  emerald: ['text-emerald-700 hover:bg-emerald-50', 'bg-emerald-600 text-white shadow-sm'],
+  blue: ['text-blue-700 hover:bg-blue-50', 'bg-blue-600 text-white shadow-sm'],
+  amber: ['text-amber-700 hover:bg-amber-50', 'bg-amber-500 text-white shadow-sm'],
+  orange: ['text-orange-700 hover:bg-orange-50', 'bg-orange-500 text-white shadow-sm'],
+  purple: ['text-purple-700 hover:bg-purple-50', 'bg-purple-600 text-white shadow-sm'],
+  rose: ['text-rose-700 hover:bg-rose-50', 'bg-rose-600 text-white shadow-sm'],
+  teal: ['text-teal-700 hover:bg-teal-50', 'bg-teal-600 text-white shadow-sm'],
+  indigo: ['text-indigo-700 hover:bg-indigo-50', 'bg-indigo-600 text-white shadow-sm'],
+  fuchsia: ['text-fuchsia-700 hover:bg-fuchsia-50', 'bg-fuchsia-600 text-white shadow-sm'],
+  sky: ['text-sky-700 hover:bg-sky-50', 'bg-sky-600 text-white shadow-sm'],
+  cyan: ['text-cyan-700 hover:bg-cyan-50', 'bg-cyan-600 text-white shadow-sm'],
+  green: ['text-green-700 hover:bg-green-50', 'bg-green-600 text-white shadow-sm'],
+};
+const CAT_TONE = { all: 'slate', polymeric: 'emerald', diabetes: 'blue', renal_pre: 'amber', renal_dialysis: 'orange', hepatic: 'purple', immune: 'rose', semi_elemental: 'teal', protein_supp: 'indigo', specialty: 'fuchsia' };
+const chipTone = (tone, on) => CHIP_TONE[tone][on ? 1 : 0];
+
 const pcfText = (pcf, sep = ' : ') => pcf ? pcf.join(sep) : 'NA';
 const kcalText = (k) => (k || k === 0) ? `${k} kcal` : 'NA kcal';
 
@@ -4624,7 +4665,7 @@ function App() {
           <div className="grid grid-cols-4 gap-1 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-2 mb-2 w-full print:hidden">
             <button
               onClick={() => setIsCalorieGuideOpen(true)}
-              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-emerald-600 hover:bg-emerald-700 border border-emerald-700 text-white px-1 py-1.5 sm:px-3 sm:py-2 rounded-xl font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 px-1 py-1.5 sm:px-3 sm:py-2 rounded-lg font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
             >
               <Stethoscope className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="truncate hidden sm:inline">{t.btnCalorieGuide}</span>
@@ -4632,7 +4673,7 @@ function App() {
             </button>
             <button
               onClick={() => setIsNitrogenCalcOpen(true)}
-              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-blue-600 hover:bg-blue-700 border border-blue-700 text-white px-1 py-1.5 sm:px-3 sm:py-2 rounded-xl font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 px-1 py-1.5 sm:px-3 sm:py-2 rounded-lg font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
             >
               <ScaleIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="truncate hidden sm:inline">{t.btnNitrogenCalc}</span>
@@ -4640,7 +4681,7 @@ function App() {
             </button>
             <button
               onClick={() => setIsProteinBoosterOpen(true)}
-              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-rose-600 hover:bg-rose-700 border border-rose-700 text-white px-1 py-1.5 sm:px-3 sm:py-2 rounded-xl font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 px-1 py-1.5 sm:px-3 sm:py-2 rounded-lg font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
             >
               <FlameIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="truncate hidden sm:inline">{t.btnProteinBooster}</span>
@@ -4648,7 +4689,7 @@ function App() {
             </button>
             <button
               onClick={() => setIsOsmolalityGuideOpen(true)}
-              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-cyan-700 hover:bg-cyan-800 border border-cyan-800 text-white px-1 py-1.5 sm:px-3 sm:py-2 rounded-xl font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
+              className="flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 min-w-0 bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 text-cyan-700 px-1 py-1.5 sm:px-3 sm:py-2 rounded-lg font-bold shadow-sm transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
             >
               <DropletIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="truncate hidden sm:inline">{t.btnOsmolality}</span>
@@ -4716,12 +4757,15 @@ function App() {
               </select>
             </div>
 
-            {/* Grid / List View Toggle */}
+            {/* Grid / List / Table View Toggle */}
             <div className={`${searchOpen ? 'hidden sm:flex' : 'hidden sm:flex'} bg-white rounded-xl border border-slate-200 p-0.5 shadow-sm shrink-0 items-center h-full`}>
               <button
                 onClick={() => setViewMode('grid')}
                 className={`h-full px-2.5 rounded-lg transition-colors flex items-center justify-center ${viewMode === 'grid' ? 'bg-slate-100 text-slate-900 font-bold' : 'text-slate-400 hover:text-slate-600'}`}
                 title={t.gridView}
+                aria-label={t.gridView}
+                aria-pressed={viewMode === 'grid'}
+                data-view="grid"
               >
                 <LayoutGrid className="w-4 h-4" />
               </button>
@@ -4729,8 +4773,21 @@ function App() {
                 onClick={() => setViewMode('list')}
                 className={`h-full px-2.5 rounded-lg transition-colors flex items-center justify-center ${viewMode === 'list' ? 'bg-slate-100 text-slate-900 font-bold' : 'text-slate-400 hover:text-slate-600'}`}
                 title={t.listView}
+                aria-label={t.listView}
+                aria-pressed={viewMode === 'list'}
+                data-view="list"
               >
                 <ListIcon className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewMode('table')}
+                className={`h-full px-2.5 rounded-lg transition-colors flex items-center justify-center ${viewMode === 'table' ? 'bg-slate-100 text-slate-900 font-bold' : 'text-slate-400 hover:text-slate-600'}`}
+                title={t.tableView}
+                aria-label={t.tableView}
+                aria-pressed={viewMode === 'table'}
+                data-view="table"
+              >
+                <TableIcon className="w-4 h-4" />
               </button>
             </div>
 
@@ -4739,7 +4796,7 @@ function App() {
               onClick={() => setFiltersOpen(!filtersOpen)}
               className={`shrink-0 h-full px-2.5 sm:px-3 rounded-xl border shadow-sm flex items-center gap-1 sm:gap-1.5 text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                 activeFilterCount > 0
-                  ? 'bg-emerald-600 border-emerald-600 text-white hover:bg-emerald-700'
+                  ? 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100'
                   : filtersOpen
                   ? 'bg-slate-100 border-slate-300 text-slate-900'
                   : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -4748,7 +4805,7 @@ function App() {
               <FilterIcon className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{t.filtersBtn}</span>
               {activeFilterCount > 0 && (
-                <span className="bg-white text-emerald-800 text-[10px] font-black rounded-full px-1.5 py-0.2">
+                <span className="bg-emerald-600 text-white text-[10px] font-black rounded-full px-1.5 py-0.2">
                   {activeFilterCount}
                 </span>
               )}
@@ -4856,10 +4913,10 @@ function App() {
                   <button
                     key={k}
                     onClick={() => setSelectedCategory(k)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      selectedCategory === k
-                        ? 'bg-emerald-600 text-white shadow-sm'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    aria-pressed={selectedCategory === k}
+                    data-cat={k}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
+                      selectedCategory === k ? 'border-transparent ' + chipTone(CAT_TONE[k], true) : 'bg-white border-slate-200 ' + chipTone(CAT_TONE[k], false)
                     }`}
                   >
                     {label}
@@ -4871,38 +4928,38 @@ function App() {
             {/* Secondary Filter Rail */}
             <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100 text-xs">
               {/* Form Filter */}
-              <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-lg border border-slate-200">
+              <div className="flex flex-wrap items-center gap-0.5 bg-white p-0.5 rounded-md border border-slate-200 shadow-sm">
                 <span className="text-[10px] font-bold text-slate-400 px-1">{t.filterForm}:</span>
-                <button onClick={() => setSelectedForm('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedForm === 'all' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>All</button>
-                <button onClick={() => setSelectedForm('powder')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedForm === 'powder' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.formPowder}</button>
-                <button onClick={() => setSelectedForm('liquid')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedForm === 'liquid' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.formLiquid}</button>
-                <button onClick={() => setSelectedForm('sachet')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedForm === 'sachet' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.formSachet}</button>
+                <button onClick={() => setSelectedForm('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('slate', selectedForm === 'all')}`} aria-pressed={selectedForm === 'all'}>All</button>
+                <button onClick={() => setSelectedForm('powder')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('sky', selectedForm === 'powder')}`} aria-pressed={selectedForm === 'powder'}>{t.formPowder}</button>
+                <button onClick={() => setSelectedForm('liquid')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('sky', selectedForm === 'liquid')}`} aria-pressed={selectedForm === 'liquid'}>{t.formLiquid}</button>
+                <button onClick={() => setSelectedForm('sachet')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('sky', selectedForm === 'sachet')}`} aria-pressed={selectedForm === 'sachet'}>{t.formSachet}</button>
               </div>
 
               {/* Protein Density */}
-              <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-lg border border-slate-200">
+              <div className="flex flex-wrap items-center gap-0.5 bg-white p-0.5 rounded-md border border-slate-200 shadow-sm">
                 <span className="text-[10px] font-bold text-slate-400 px-1">{t.filterProteinDensity}:</span>
-                <button onClick={() => setSelectedProteinDensity('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedProteinDensity === 'all' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>All</button>
-                <button onClick={() => setSelectedProteinDensity('standard')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedProteinDensity === 'standard' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>&lt;40g</button>
-                <button onClick={() => setSelectedProteinDensity('high')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedProteinDensity === 'high' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>40-55g</button>
-                <button onClick={() => setSelectedProteinDensity('very_high')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedProteinDensity === 'very_high' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>&gt;55g</button>
+                <button onClick={() => setSelectedProteinDensity('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('slate', selectedProteinDensity === 'all')}`} aria-pressed={selectedProteinDensity === 'all'}>All</button>
+                <button onClick={() => setSelectedProteinDensity('standard')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('rose', selectedProteinDensity === 'standard')}`} aria-pressed={selectedProteinDensity === 'standard'}>&lt;40g</button>
+                <button onClick={() => setSelectedProteinDensity('high')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('rose', selectedProteinDensity === 'high')}`} aria-pressed={selectedProteinDensity === 'high'}>40-55g</button>
+                <button onClick={() => setSelectedProteinDensity('very_high')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('rose', selectedProteinDensity === 'very_high')}`} aria-pressed={selectedProteinDensity === 'very_high'}>&gt;55g</button>
               </div>
 
               {/* Fiber */}
-              <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-lg border border-slate-200">
+              <div className="flex flex-wrap items-center gap-0.5 bg-white p-0.5 rounded-md border border-slate-200 shadow-sm">
                 <span className="text-[10px] font-bold text-slate-400 px-1">{t.filterFiber}:</span>
-                <button onClick={() => setSelectedFiber('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedFiber === 'all' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>All</button>
-                <button onClick={() => setSelectedFiber('with')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedFiber === 'with' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.fiberWith}</button>
-                <button onClick={() => setSelectedFiber('free')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedFiber === 'free' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.fiberFree}</button>
+                <button onClick={() => setSelectedFiber('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('slate', selectedFiber === 'all')}`} aria-pressed={selectedFiber === 'all'}>All</button>
+                <button onClick={() => setSelectedFiber('with')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('green', selectedFiber === 'with')}`} aria-pressed={selectedFiber === 'with'}>{t.fiberWith}</button>
+                <button onClick={() => setSelectedFiber('free')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('green', selectedFiber === 'free')}`} aria-pressed={selectedFiber === 'free'}>{t.fiberFree}</button>
               </div>
 
               {/* Osmolality */}
-              <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-lg border border-slate-200">
+              <div className="flex flex-wrap items-center gap-0.5 bg-white p-0.5 rounded-md border border-slate-200 shadow-sm">
                 <span className="text-[10px] font-bold text-slate-400 px-1">{t.filterOsmolality}:</span>
-                <button onClick={() => setSelectedOsmolality('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedOsmolality === 'all' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>All</button>
-                <button onClick={() => setSelectedOsmolality('iso')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedOsmolality === 'iso' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.osmIso}</button>
-                <button onClick={() => setSelectedOsmolality('mod')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedOsmolality === 'mod' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.osmMod}</button>
-                <button onClick={() => setSelectedOsmolality('hyper')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer ${selectedOsmolality === 'hyper' ? 'bg-white shadow text-slate-800' : 'text-slate-500'}`}>{t.osmHyper}</button>
+                <button onClick={() => setSelectedOsmolality('all')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('slate', selectedOsmolality === 'all')}`} aria-pressed={selectedOsmolality === 'all'}>All</button>
+                <button onClick={() => setSelectedOsmolality('iso')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('cyan', selectedOsmolality === 'iso')}`} aria-pressed={selectedOsmolality === 'iso'}>{t.osmIso}</button>
+                <button onClick={() => setSelectedOsmolality('mod')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('cyan', selectedOsmolality === 'mod')}`} aria-pressed={selectedOsmolality === 'mod'}>{t.osmMod}</button>
+                <button onClick={() => setSelectedOsmolality('hyper')} className={`px-2 py-0.5 rounded text-[11px] font-bold cursor-pointer transition-all ${chipTone('cyan', selectedOsmolality === 'hyper')}`} aria-pressed={selectedOsmolality === 'hyper'}>{t.osmHyper}</button>
               </div>
 
               {/* Clear All button */}
@@ -4933,10 +4990,9 @@ function App() {
                   <button
                     key={k}
                     onClick={() => toggleFeature(k)}
+                    aria-pressed={on}
                     className={`px-2 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
-                      on
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      on ? 'border-transparent ' + chipTone('indigo', true) : 'bg-white border-slate-200 ' + chipTone('indigo', false)
                     }`}
                   >
                     {on && '✓ '}{label}
@@ -5103,9 +5159,59 @@ function App() {
               );
             })}
           </div>
+        ) : viewMode === 'list' ? (
+          /* List View: one compact row per product */
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm divide-y divide-slate-100" data-list-view>
+            {sortedFormulas.map((med) => {
+              const isCompared = compareList.some(c => c.id === med.id);
+              const osmBadge = getOsmolalityBadge(med.osmolality);
+              return (
+                <div key={med.id} className="flex items-start gap-3 p-3 hover:bg-slate-50 transition-colors" data-list-row>
+                  <ProductPhoto id={med.id} name={med.name} form={med.form} color="#059669" className="w-11 h-11 shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <button type="button" onClick={() => setDetailFormula(med)} className="min-w-0 text-left cursor-pointer" data-list-open>
+                        <span className="font-extrabold text-slate-900 text-sm leading-tight block break-words hover:text-emerald-700">{med.name}</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mt-0.5 break-words">{med.company}</span>
+                      </button>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => toggleCompare(med)}
+                          className={`p-1.5 rounded-lg border transition-all ${isCompared ? 'bg-rose-50 border-rose-300 text-rose-600' : 'bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-700'}`}
+                          title={isCompared ? t.compareRemove : t.compareAdd}
+                          aria-label={isCompared ? t.compareRemove : t.compareAdd}
+                          aria-pressed={isCompared}
+                        >
+                          <CompareIcon className="w-4 h-4" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setDetailFormula(med)}
+                          className="p-1.5 rounded-lg text-emerald-700 hover:bg-emerald-50 transition-colors"
+                          title={t.viewDetails}
+                          aria-label={t.viewDetails}
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-600">
+                      <span><strong className="text-slate-800">{kcalText(med.servingKcal)}</strong> · {med.servingProtein} g protein</span>
+                      <span><strong className="text-rose-700">{med.proteinPer1000Kcal ?? 'NA'} g</strong> {t.perKcal}</span>
+                      <span>P:C:F {pcfText(med.pcfRatio, ':')}</span>
+                      {med.gi ? <span>GI {med.gi}</span> : null}
+                      <span className={`px-1.5 py-px rounded text-[10px] font-bold border ${osmBadge.tone}`}>{osmBadge.label}</span>
+                    </div>
+                    <CountryLines med={med} t={t} regions={countries} showHolder={showHolder} listRow className="text-[11px] mt-1.5" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         ) : (
-          /* List View Rendering */
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          /* Table View Rendering */
+          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm" data-table-view>
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left border-collapse">
                 <thead>
@@ -5158,9 +5264,9 @@ function App() {
                           <span className="text-[11px] font-bold block mb-0.5">{pcfText(med.pcfRatio, ':')}</span>
                           <PcfBar pcf={med.pcfRatio} className="h-1.5 w-20" />
                         </td>
-                        <td className="p-3 text-slate-600 max-w-xs truncate">
-                          <span className="font-semibold block text-slate-800 truncate">{med.proteinSource}</span>
-                          <span className="text-[10px] text-slate-400 block truncate">{med.fatSource}</span>
+                        <td className="p-3 text-slate-600 min-w-[12rem] max-w-xs">
+                          <span className="font-semibold block text-slate-800 break-words">{med.proteinSource}</span>
+                          <span className="text-[10px] text-slate-400 block break-words">{med.fatSource}</span>
                         </td>
                         <td className="p-3 text-slate-700">
                           {med.hasFiber ? med.fiberDetails : <span className="text-slate-400">None</span>}
@@ -5173,7 +5279,7 @@ function App() {
                         <td className="p-3 text-right">
                           <button
                             onClick={() => setDetailFormula(med)}
-                            className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50 px-2 py-1 rounded transition-colors"
+                            className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50 px-2 py-1 rounded transition-colors whitespace-nowrap"
                           >
                             {t.viewDetails}
                           </button>

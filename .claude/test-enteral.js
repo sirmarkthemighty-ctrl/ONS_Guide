@@ -302,6 +302,50 @@ async function main() {
     if (reCollapsed) throw new Error('References section failed to collapse on second click!');
     console.log('✓ References section re-collapsed cleanly');
 
+    // Verification: grid / list / table views
+    const views = await evalJs(`(async () => {
+      const wait = (ms) => new Promise(r => setTimeout(r, ms));
+      const pick = async (v) => { document.querySelector('[data-view="' + v + '"]').click(); await wait(300); };
+      const grid = document.querySelectorAll('div.group').length;
+      await pick('list');
+      const rows = document.querySelectorAll('[data-list-row]').length;
+      const listPressed = document.querySelector('[data-view="list"]').getAttribute('aria-pressed');
+      await pick('table');
+      const tableRows = document.querySelectorAll('[data-table-view] tbody tr').length;
+      await pick('grid');
+      return { grid, rows, listPressed, tableRows, back: document.querySelectorAll('div.group').length };
+    })()`);
+    if (!(views.rows === views.grid && views.tableRows === views.grid && views.back === views.grid && views.listPressed === 'true' && views.grid > 0)) throw new Error('View modes broken: ' + JSON.stringify(views));
+    console.log(`✓ Grid, list and table views each show all ${views.grid} formulas`);
+
+    // Layout audit (.claude/ui-audit.js) of the list and table views at desktop and phone width, Thai and English
+    const auditSrc = fs.readFileSync(path.join(__dirname, 'ui-audit.js'), 'utf8');
+    await evalJs(auditSrc + '; true');
+    const auditViews = async (viewList) => evalJs(`(async () => {
+      const wait = (ms) => new Promise(r => setTimeout(r, ms));
+      const out = [];
+      const langBtn = () => [...document.querySelectorAll('[data-top-controls] button')].find(b => /^(EN|ไทย)$/.test(b.textContent.trim()));
+      for (let pass = 0; pass < 2; pass++) {
+        for (const v of ${JSON.stringify(viewList)}) {
+          document.querySelector('[data-view="' + v + '"]').click(); await wait(300);
+          const r = window.__uiAudit(document.body) || [];
+          for (const x of (Array.isArray(r) ? r : [])) out.push(v + ' ' + (pass ? 'lang2' : 'lang1') + ' ' + x.type + ': ' + String(x.text || '').slice(0, 50));
+        }
+        langBtn().click(); await wait(300);
+      }
+      document.querySelector('[data-view="grid"]').click(); await wait(200);
+      return out;
+    })()`);
+    const desktopIssues = await auditViews(['list', 'table']);
+    await send('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
+    await sleep(500);
+    // Phones cannot pick table view (the switch shows from 640 px), and the table scrolls sideways by design
+    const phoneIssues = await auditViews(['list']);
+    await send('Emulation.clearDeviceMetricsOverride');
+    await sleep(500);
+    if (desktopIssues.length || phoneIssues.length) throw new Error('Layout issues:\n  ' + [...desktopIssues.map(x => '1280 ' + x), ...phoneIssues.map(x => '375 ' + x)].join('\n  '));
+    console.log('✓ No cut-off, overlapping or overflowing text: list and table at 1280 px, list at 375 px (Thai and English)');
+
     // Verification: donate button opens the PromptPay QR pop-up; Escape closes only the pop-up
     await evalJs('document.querySelector("[data-donate-btn]").click()');
     await sleep(500);
